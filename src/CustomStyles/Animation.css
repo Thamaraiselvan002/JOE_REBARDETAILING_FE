@@ -1,0 +1,52 @@
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expandWidth {
+  from { width: 0; opacity: 0; }
+  to   { width: 100%; opacity: 1; }
+}
+
+/* ── Base scroll state ── */
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.scroll-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Stagger delays (apply via className) ── */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* ── Hero / page-load animations (no scroll needed) ── */
+.anim-hero-badge {
+  opacity: 0;
+  animation: fadeUp 2.5s ease-out  2.5s forwards;
+}
+
+.anim-hero-title {
+  opacity: 0;
+  animation: fadeUp 0.65s ease-out 0.25s forwards;
+}
+
+.anim-hero-divider {
+  width: 0;
+  opacity: 0;
+  animation: expandWidth 0.5s ease-out 0.45s forwards;
+  /*         ↑ keyframe name  ↑ duration  ↑ delay  ↑ stay at end */
+}
+
+.anim-hero-desc {
+  opacity: 0;
+  animation: fadeUp 0.65s ease-out 0.55s forwards;
+}

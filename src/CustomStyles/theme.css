@@ -1,0 +1,124 @@
+/* ============================================================
+   theme.css  –  Design Tokens for Rebar / Construction App
+   Import this file once in main.jsx or index.css
+   Usage: var(--color-primary), var(--font-heading), etc.
+   ============================================================ */
+
+:root {
+
+/* ── BRAND COLORS ── */
+  --color-primary: #10b981;
+  --color-primary-hover: #059669;
+  
+  /* --color-primary: #e11d48;
+  --color-primary-hover: #be123c; */
+
+  /* --color-primary: #0ea5e9;
+  --color-primary-hover: #0284c7;
+  --color-bg-dark: #f0f9ff; */
+
+  --color-bg-dark: #fff1f2;
+  --color-primary-muted:  rgba(99, 102, 241, 0.08);
+  --color-primary-border: rgba(99, 102, 241, 0.30);
+  --color-primary-border-hover: rgba(99, 102, 241, 0.50);
+
+  /* ── BACKGROUND COLORS ── */
+  --color-bg-base:        #f8fafc;   /* very light gray (not pure white) */
+  --color-bg-dark:        #eef2ff;   /* soft indigo tint (sections) */
+  --color-bg-card:        #ffffff;   /* pure white cards */
+  --color-bg-card-glass:  rgba(255, 255, 255, 0.7);
+  --color-bg-surface:     #f1f5f9;
+  --color-bg-overlay:     rgba(0, 0, 0, 0.05);
+
+  /* ── BORDER COLORS ── */
+  --color-border:         #e2e8f0;   /* soft border */
+  --color-border-light:   #cbd5f5;
+
+  /* ── TEXT COLORS ── */
+  --color-text-primary:   #0f172a;   /* dark slate (not black) */
+  --color-text-muted:     #64748b;   /* soft gray */
+  --color-text-dark:      #ffffff;
+  --color-text-dark-muted:#e2e8f0;
+  --color-text-accent:    #6366f1;
+
+  /* ── WINDOW / DECORATION COLORS (SVG building scene) ── */
+  --color-window-warm:    #eab308;   /* warm lit windows                           */
+  --color-window-cool:    #93c5fd;   /* blue-300 – cool lit windows                */
+  --color-window-dark:    #334155;   /* slate-700 – unlit windows                  */
+  --color-scaffold:       #374151;   /* gray-700 – scaffolding bars                */
+  --color-scaffold-light: #4b5563;   /* gray-600 – lighter scaffold                */
+  --color-dust:           #d4d4d8;   /* zinc-300 – dust particles                  */
+
+  /* ── GRADIENT STOPS (Sky in SVG) ── */
+  --color-sky-top:        #0a0a0f;
+  --color-sky-bottom:     #1a1a2e;
+
+  /* ── TYPOGRAPHY ── */
+  /* Import in index.html or via @import at top of index.css:
+     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;700;900&display=swap');
+  */
+  --font-heading:  'Bebas Neue', 'Impact', sans-serif;   /* h1, h2, uppercase titles  */
+  --font-body:     'Barlow', 'Helvetica Neue', sans-serif; /* paragraphs, labels       */
+
+  /* ── FONT SIZES ── */
+  --text-xs:   0.75rem;    /* 12px – badges, labels     */
+  --text-sm:   0.875rem;   /* 14px – card descriptions  */
+  --text-base: 1rem;       /* 16px – body default       */
+  --text-lg:   1.125rem;   /* 18px – hero paragraph     */
+  --text-4xl:  2.25rem;    /* 36px – stat numbers       */
+  --text-5xl:  3rem;       /* 48px – section headings   */
+  --text-7xl:  4.5rem;     /* 72px – hero h1            */
+
+  /* ── FONT WEIGHTS ── */
+  --weight-normal: 400;
+  --weight-bold:   700;
+  --weight-black:  900;
+
+  /* ── LETTER SPACING ── */
+  --tracking-wide:   0.05em;
+  --tracking-wider:  0.1em;
+  --tracking-widest: 0.3em;    /* badge / section labels    */
+
+  /* ── SPACING ── */
+  --space-section-y: 6rem;     /* py-24 – vertical section padding */
+  --space-section-x: 1.5rem;   /* px-6  – horizontal padding       */
+
+  /* ── BORDER RADIUS ── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* ── TRANSITIONS ── */
+  --transition-fast:   150ms ease;
+  --transition-normal: 300ms ease;
+
+  /* ── SHADOWS ── */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  /* ── Z-INDEX SCALE ── */
+  --z-bg:      0;
+  --z-content: 10;
+  --z-overlay: 20;
+
+
+/* ── SVG LIGHT THEME COLORS ── */
+/* SVG / ENGINEERING COLORS */
+--color-blueprint-bg: #ecfeff;
+--color-blueprint-line: #c7d2fe;
+
+--color-rebar: #475569;
+--color-rebar-highlight: #10b981;
+
+--color-crane: #334155;
+--color-worker: #1e293b;
+
+--color-glow: rgba(16,185,129,0.2);
+
+/* MATTE ENGINEERING LOOK */
+--color-matte-bg: #f1f5f9;
+--color-matte-line: #94a3b8;
+--color-matte-rebar: #64748b;
+--color-matte-building: #cbd5f5;
+--color-matte-overlay: rgba(255,255,255,0.7);
+
+}
+

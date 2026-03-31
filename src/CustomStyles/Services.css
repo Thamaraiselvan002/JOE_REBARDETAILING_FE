@@ -1,0 +1,98 @@
+/* ============================================
+   Services.css — Dark Industrial Theme
+   All elements animate: bottom → top (fade-up)
+   ============================================ */
+
+ 
+
+/* ---------- Keyframes ---------- */
+  /*
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUpFar {
+  from { opacity: 0; transform: translateY(80px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expandWidth {
+  from { width: 0; opacity: 0; }
+  to   { width: 4rem; opacity: 1; }
+}
+
+.services-hero-badge {
+  display: block;
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out 0.1s forwards;
+}
+
+.services-hero-title {
+  opacity: 0;
+  animation: fadeUp 0.65s ease-out 0.25s forwards;
+}
+
+.services-hero-divider {
+  width: 0;
+  opacity: 0;
+  animation: expandWidth 0.5s ease-out 0.45s forwards;
+}
+
+.services-hero-desc {
+  opacity: 0;
+  animation: fadeUp 0.65s ease-out 0.55s forwards;
+}
+
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scroll-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card {
+  NO animation here — handled entirely by scroll-fade-up + is-visible 
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease,
+              opacity 0.7s ease-out; /* keep opacity transition from scroll-fade-up 
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(234, 179, 8, 0.12);
+}
+
+.service-card-icon {
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-card-icon {
+  transform: scale(1.1);
+}
+
+.process-section-header {
+}
+
+.process-divider {
+  height: 4px;
+  background-color: #eab308;
+  width: 0;
+  opacity: 0;
+  transition: width 0.6s ease-out 0.2s, opacity 0.4s ease-out 0.2s;
+  margin: 1rem auto 0;
+}
+
+.process-section-header.is-visible .process-divider {
+  width: 4rem;
+  opacity: 1;
+}
+
+.process-step {
+}
+
+
+*/

@@ -1,0 +1,117 @@
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* COMMON LAYER */
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.layer.active {
+  opacity: 1;
+}
+
+/* ───────── BLUEPRINT ───────── */
+.blueprint {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      var(--color-matte-line) 0px,
+      var(--color-matte-line) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--color-matte-line) 0px,
+      var(--color-matte-line) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+
+  background-color: var(--color-matte-bg);
+  opacity: 0.6;
+}
+
+/* ───────── REBAR ───────── */
+.rebar {
+  background-color: var(--color-matte-bg);
+}
+
+.rebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      var(--color-matte-rebar),
+      var(--color-matte-rebar) 3px,
+      transparent 3px,
+      transparent 30px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--color-matte-rebar),
+      var(--color-matte-rebar) 3px,
+      transparent 3px,
+      transparent 30px
+    );
+
+  animation: rebarGrow 2s ease forwards;
+}
+
+@keyframes rebarGrow {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* ───────── BUILDING ───────── */
+.building {
+  background-color: var(--color-matte-bg);
+}
+
+.building::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  left: 60%;
+  bottom: 80px;
+
+  background: var(--color-matte-building);
+  box-shadow: 0 0 0 1px var(--color-border);
+
+  animation: buildUp 2s ease forwards;
+}
+
+@keyframes buildUp {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: 400px;
+    opacity: 1;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(3px);
+}

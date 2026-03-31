@@ -1,0 +1,65 @@
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+  
+}
+
+.carousel-wrapper:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+.carousel-group {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding-right: 1em;
+}
+
+.card {
+  flex: 0 0 10em;
+  height: 10em;
+  background: cornsilk;
+  border-radius: 10px;
+  overflow: hidden;       
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+} 
+
+
+.carousel-wrapper {
+  position: relative;
+   cursor: pointer;
+}
+
+/* Left and right fade shadow */
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 8em;          
+  height: 100%;
+  z-index: 10;
+  pointer-events: none; 
+}
+
+.carousel-wrapper::before {
+  left: 0;
+  backdrop-filter: blur(2px);
+  background: linear-gradient(to right, rgba(0,0,0,0.3), transparent);
+}
+
+.carousel-wrapper::after {
+   right: 0; 
+  backdrop-filter: blur(2px);
+  background: linear-gradient(to left, rgba(0,0,0,0.3), transparent);
+}
