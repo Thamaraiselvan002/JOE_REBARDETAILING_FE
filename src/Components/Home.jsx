@@ -61,9 +61,10 @@ export default function Home({ setActivePage }) {
               className="anim-hero-badge inline-block text-xs font-bold uppercase mb-4 px-3 py-1"
               style={{
                 color:        'var(--color-primary)',
-                border:       '1px solid var(--color-primary-border)',
+                border:       '2px solid var(--color-primary-border)',
                 letterSpacing:'var(--tracking-widest)',
                 fontFamily:   'var(--font-body)',
+                background:   '#eaedf1ff'
               }}
             >
               Est. 2023 · India
@@ -71,8 +72,8 @@ export default function Home({ setActivePage }) {
 
             {/* Heading */}
             <h1
-              className="anim-hero-title text-5xl md:text-7xl font-black leading-none uppercase mb-6"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="anim-hero-title text-5xl font-black md:text-7xl leading-none uppercase mb-6"
+              style={{ fontFamily: 'var(--font-heading)'}}
             >
               We Build
               <br />
@@ -91,7 +92,7 @@ export default function Home({ setActivePage }) {
             <p
               className="anim-hero-desc text-lg leading-relaxed mb-8 max-w-md"
               style={{
-                color:      'var(--color-text-muted)',
+                color:      'white',
                 fontFamily: 'var(--font-body)',
               }}
             >
@@ -254,20 +255,25 @@ export default function Home({ setActivePage }) {
             <div
               key={f.title}
               ref={addRef}
-              className="scroll-fade-up p-7 transition-all duration-300 group"
+              // className="scroll-fade-up p-7 transition-all duration-300 group"
+              className="service-card scroll-fade-up border p-8 group overflow-hidden min-w-0 w-full 
+                transition-all duration-200 ease-in-out transform"
               style={{
                 backgroundColor: 'var(--color-bg-card)',
                 border:          '1px solid var(--color-border)',
                 transitionDelay: `${i * 100}ms`,
               }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'var(--color-primary)';
-                e.currentTarget.style.transform   = 'translateY(-4px)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--color-border)';
-                e.currentTarget.style.transform   = 'translateY(0)';
-              }}
+             onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
+                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                }}
+
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
+                }}
             >
               <span className="text-4xl block mb-4">{f.icon}</span>
               <h3
@@ -319,7 +325,10 @@ export default function Home({ setActivePage }) {
             Get a free consultation and detailed cost estimate from our experts.
           </p>
           <button
-            onClick={() => setActivePage('Contact')}
+            onClick={() => {
+                setActivePage('Contact');
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
             className="px-10 py-4 text-sm font-black uppercase transition-all duration-200"
             style={{
               backgroundColor: 'var(--color-bg-base)',

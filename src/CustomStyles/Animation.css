@@ -31,7 +31,7 @@
 /* ── Hero / page-load animations (no scroll needed) ── */
 .anim-hero-badge {
   opacity: 0;
-  animation: fadeUp 2.5s ease-out  2.5s forwards;
+  animation: fadeUp 0.5s ease-out  0.5s forwards;
 }
 
 .anim-hero-title {
