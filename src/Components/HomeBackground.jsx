@@ -1,10 +1,9 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Text, Line, Sphere, Cylinder } from "@react-three/drei";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import * as THREE from "three";
 
 // ─── CURVED REBAR ─────────────────────────────────────────────────────────────
-function CurvedRebar({ start, end, sag = 0.15, color = "#b6cad3ff", radius = 0.018 }) {
+function CurvedRebar({ start, end, sag = 0.15, color = "#b8d2deff", radius = 0.018 }) {
   const points = useMemo(() => {
     const s = new THREE.Vector3(...start);
     const e = new THREE.Vector3(...end);
@@ -34,7 +33,6 @@ function RebarCage({ visible }) {
   const count = 9;
   const height = 3.5;
 
-  // Horizontal rebars with slight sag
   const horizontalBars = useMemo(() => {
     const bars = [];
     for (let y = 0; y <= height; y += spacing) {
@@ -47,7 +45,6 @@ function RebarCage({ visible }) {
     return bars;
   }, []);
 
-  // Vertical rebars (straight, no sag)
   const verticalBars = useMemo(() => {
     const bars = [];
     for (let i = 0; i < count; i++) {
@@ -70,7 +67,7 @@ function RebarCage({ visible }) {
   return (
     <group ref={group}>
       {verticalBars.map((b) => (
-        <CurvedRebar key={b.key} start={b.start} end={b.end} sag={0} color="#95a4abff" />
+        <CurvedRebar key={b.key} start={b.start} end={b.end} sag={0} color="#b8d2deff" />
       ))}
       {horizontalBars.map((b) => (
         <CurvedRebar key={b.key} start={b.start} end={b.end} sag={0.1} color="#b8d2deff" />
@@ -83,22 +80,18 @@ function RebarCage({ visible }) {
 function Worker({ position, rotation = [0, 0, 0], color = "#ff8f00" }) {
   return (
     <group position={position} rotation={rotation}>
-      {/* Body */}
       <mesh position={[0, 0.45, 0]}>
         <cylinderGeometry args={[0.09, 0.11, 0.5, 8]} />
         <meshStandardMaterial color={color} roughness={0.8} />
       </mesh>
-      {/* Head */}
       <mesh position={[0, 0.82, 0]}>
         <sphereGeometry args={[0.1, 8, 8]} />
         <meshStandardMaterial color="#ffcc80" roughness={0.9} />
       </mesh>
-      {/* Hard hat */}
       <mesh position={[0, 0.93, 0]}>
         <cylinderGeometry args={[0.12, 0.12, 0.06, 8]} />
         <meshStandardMaterial color={color} roughness={0.5} />
       </mesh>
-      {/* Legs */}
       <mesh position={[-0.06, 0.12, 0]}>
         <cylinderGeometry args={[0.045, 0.04, 0.38, 6]} />
         <meshStandardMaterial color="#37474f" roughness={0.9} />
@@ -107,7 +100,6 @@ function Worker({ position, rotation = [0, 0, 0], color = "#ff8f00" }) {
         <cylinderGeometry args={[0.045, 0.04, 0.38, 6]} />
         <meshStandardMaterial color="#37474f" roughness={0.9} />
       </mesh>
-      {/* Arms */}
       <mesh position={[-0.17, 0.55, 0]} rotation={[0, 0, 0.6]}>
         <cylinderGeometry args={[0.03, 0.03, 0.3, 6]} />
         <meshStandardMaterial color={color} roughness={0.8} />
@@ -133,40 +125,32 @@ function TowerCrane({ visible }) {
 
   return (
     <group position={[5.5, 0, -1]}>
-      {/* Mast */}
       <mesh position={[0, 4, 0]}>
         <boxGeometry args={[0.18, 8, 0.18]} />
         <meshStandardMaterial color="#ffd54f" metalness={0.7} roughness={0.3} />
       </mesh>
-      {/* Rotating jib group */}
       <group ref={craneRef} position={[0, 8.1, 0]}>
-        {/* Main jib */}
         <mesh position={[2.2, 0, 0]}>
           <boxGeometry args={[4.4, 0.13, 0.13]} />
           <meshStandardMaterial color="#ffd54f" metalness={0.7} roughness={0.3} />
         </mesh>
-        {/* Counter jib */}
         <mesh position={[-1.2, 0, 0]}>
           <boxGeometry args={[2.4, 0.13, 0.13]} />
           <meshStandardMaterial color="#ffd54f" metalness={0.7} roughness={0.3} />
         </mesh>
-        {/* Counterweight */}
         <mesh position={[-2.1, -0.2, 0]}>
           <boxGeometry args={[0.5, 0.4, 0.4]} />
-          <meshStandardMaterial color="#607d8b" metalness={0.6} roughness={0.4} />
+          <meshStandardMaterial color="#aabcc5ff" metalness={0.6} roughness={0.4} />
         </mesh>
-        {/* Cable */}
         <mesh position={[3.5, -1.0, 0]}>
           <cylinderGeometry args={[0.015, 0.015, 2.0, 4]} />
-          <meshStandardMaterial color="#bdbdbd" metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial color="#d9cdcdff" metalness={0.9} roughness={0.1} />
         </mesh>
-        {/* Hook block */}
         <mesh position={[3.5, -2.1, 0]}>
           <boxGeometry args={[0.15, 0.12, 0.12]} />
-          <meshStandardMaterial color="#424242" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color="#ccc4c4ff" metalness={0.8} roughness={0.2} />
         </mesh>
       </group>
-      {/* Cabin */}
       <mesh position={[0, 7.6, 0.2]}>
         <boxGeometry args={[0.35, 0.35, 0.35]} />
         <meshStandardMaterial color="#80cbc4" metalness={0.3} roughness={0.5} />
@@ -181,21 +165,18 @@ function BuildingShell({ visible, stage }) {
 
   return (
     <group>
-      {/* Concrete slabs */}
       {[0, 1.6, 3.2].map((y, i) => (
         <mesh key={i} position={[0, y, 0]}>
           <boxGeometry args={[4.2, 0.18, 4.2]} />
           <meshStandardMaterial color="#cfd8dc" roughness={0.95} metalness={0.05} />
         </mesh>
       ))}
-      {/* Columns */}
       {[[-1.8, -1.8], [-1.8, 1.8], [1.8, -1.8], [1.8, 1.8]].map(([x, z], i) => (
         <mesh key={i} position={[x, 1.7, z]}>
           <boxGeometry args={[0.28, 3.6, 0.28]} />
           <meshStandardMaterial color="#b0bec5" roughness={0.9} metalness={0.1} />
         </mesh>
       ))}
-      {/* Walls (partial, BIM-like) */}
       {stage >= 2 && (
         <>
           <mesh position={[0, 1.7, -2.1]}>
@@ -208,7 +189,6 @@ function BuildingShell({ visible, stage }) {
           </mesh>
         </>
       )}
-      {/* Ground pad */}
       <mesh position={[0, -0.07, 0]} receiveShadow>
         <boxGeometry args={[8, 0.1, 8]} />
         <meshStandardMaterial color="#78909c" roughness={1} metalness={0} />
@@ -223,7 +203,7 @@ function BlueprintGrid({ visible }) {
 
   useFrame((_, delta) => {
     if (groupRef.current && visible) {
-      groupRef.current.rotation.z += delta * 0.1; // 🔥 slow rotation
+      groupRef.current.rotation.z += delta * 0.1;
     }
   });
 
@@ -245,7 +225,6 @@ function BlueprintGrid({ visible }) {
           <lineBasicMaterial color={i % 4 === 0 ? "#1565c0" : "#1976d2"} opacity={0.6} transparent />
         </line>
       ))}
-
       {[...Array(21)].map((_, i) => (
         <line key={`v${i}`}>
           <bufferGeometry
@@ -263,13 +242,11 @@ function BlueprintGrid({ visible }) {
     </group>
   );
 }
+
 // ─── CINEMATIC CAMERA ─────────────────────────────────────────────────────────
 const CAMERA_PATHS = [
-  // Stage 0 – Planning: orbit high, top-down BIM view
   { pos: [0, 11, 5], target: [0, 0, 0], fov: 42 },
-  // Stage 1 – Reinforcement: close side view of cage
   { pos: [6, 3, 6], target: [0, 1.5, 0], fov: 38 },
-  // Stage 2 – Execution: dramatic low-angle construction view
   { pos: [-5, 2, 7], target: [0, 2, 0], fov: 55 },
 ];
 
@@ -298,43 +275,39 @@ const STAGE_DURATIONS = [5000, 6000, 6000];
 function Scene({ onStageChange }) {
   const [stage, setStage] = useState(0);
 
+  // ✅ Fixed: wrapped onStageChange call so it's not a dependency issue
+  const handleStageChange = useCallback((s) => {
+    onStageChange?.(s);
+  }, [onStageChange]);
+
   useEffect(() => {
-    onStageChange?.(stage);
+    handleStageChange(stage);
     const timer = setTimeout(() => {
       setStage((p) => (p + 1) % 3);
     }, STAGE_DURATIONS[stage]);
     return () => clearTimeout(timer);
-  }, [stage]);
+  }, [stage, handleStageChange]);
 
   return (
     <>
-      {/* Lighting – BIM-quality */}
       <ambientLight intensity={0.45} color="#e3f2fd" />
       <directionalLight position={[8, 12, 6]} intensity={1.1} castShadow color="#fff8e1" />
       <directionalLight position={[-6, 4, -4]} intensity={0.35} color="#b3e5fc" />
       <pointLight position={[0, 6, 0]} intensity={0.4} color="#ffffff" />
       <hemisphereLight skyColor="#90caf9" groundColor="#37474f" intensity={0.5} />
 
-      {/* Ground */}
-      {/* <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} receiveShadow>
-        <planeGeometry args={[30, 30]} />
-        <meshStandardMaterial color="#546e7a" roughness={1} />
-      </mesh> */}
-
       {stage !== 0 && (
-  <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} receiveShadow>
-    <planeGeometry args={[30, 30]} />
-    <meshStandardMaterial color="#546e7a" roughness={1} />
-  </mesh>
-)}
-<lineBasicMaterial color="#42a5f5" opacity={0.7} transparent />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.12, 0]} receiveShadow>
+          <planeGeometry args={[30, 30]} />
+          <meshStandardMaterial color="#546e7a" roughness={1} />
+        </mesh>
+      )}
+      <lineBasicMaterial color="#42a5f5" opacity={0.7} transparent />
 
-      {/* Stage content */}
       <BlueprintGrid visible={stage === 0} />
       <RebarCage visible={stage === 1} />
       <BuildingShell visible={stage === 2} stage={stage} />
 
-      {/* Workers always on stage 1 & 2 */}
       {stage >= 1 && (
         <>
           <Worker position={[-2.2, 0, 1.5]} rotation={[0, 0.8, 0]} color="#ff8f00" />
@@ -344,10 +317,7 @@ function Scene({ onStageChange }) {
         </>
       )}
 
-      {/* Crane on stage 1 & 2 */}
       <TowerCrane visible={stage >= 1} />
-
-      {/* Cinematic camera (disable orbit during cinematic) */}
       <CinematicCamera stage={stage} />
     </>
   );
@@ -378,56 +348,16 @@ function StageHUD({ stage }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        padding: "2.5rem",
+        padding: "clamp(1rem, 4vw, 2.5rem)",       // ✅ responsive padding
         fontFamily: "'Courier New', 'Courier', monospace",
       }}
     >
-      {/* Top-left BIM tag */}
-      {/* <div
-        style={{
-          position: "absolute",
-          top: "1.6rem",
-          left: "2rem",
-          display: "flex",
-          gap: "0.6rem",
-          alignItems: "center",
-        }}
-      >
-        <span
-          style={{
-            background: "rgba(0,0,0,0.55)",
-            border: "1px solid #546e7a",
-            borderRadius: 3,
-            padding: "2px 10px",
-            color: "#90caf9",
-            fontSize: "0.68rem",
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-          }}
-        >
-          BIM Model
-        </span>
-        <span
-          style={{
-            background: "rgba(0,0,0,0.55)",
-            border: "1px solid #546e7a",
-            borderRadius: 3,
-            padding: "2px 10px",
-            color: "#78909c",
-            fontSize: "0.68rem",
-            letterSpacing: "0.14em",
-          }}
-        >
-          Rev 2.4.1
-        </span>
-      </div> */}
-
       {/* Phase indicator dots */}
       <div
         style={{
           position: "absolute",
           top: "50%",
-          right: "2rem",
+          right: "clamp(0.75rem, 3vw, 2rem)",       // ✅ responsive right offset
           transform: "translateY(-50%)",
           display: "flex",
           flexDirection: "column",
@@ -439,7 +369,7 @@ function StageHUD({ stage }) {
           <div key={l} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span
               style={{
-                fontSize: "0.55rem",
+                fontSize: "clamp(0.45rem, 1.2vw, 0.55rem)",   // ✅ responsive font
                 color: i === stage ? STAGE_COLORS[i] : "#546e7a",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
@@ -469,7 +399,7 @@ function StageHUD({ stage }) {
         <div
           style={{
             color: "#546e7a",
-            fontSize: "0.65rem",
+            fontSize: "clamp(0.5rem, 1.5vw, 0.65rem)",        // ✅ responsive
             letterSpacing: "0.25em",
             textTransform: "uppercase",
             marginBottom: "0.35rem",
@@ -480,7 +410,7 @@ function StageHUD({ stage }) {
         <div
           style={{
             color,
-            fontSize: "clamp(2rem, 5vw, 3.2rem)",
+            fontSize: "clamp(1.4rem, 5vw, 3.2rem)",           // ✅ responsive
             fontWeight: 700,
             letterSpacing: "0.04em",
             lineHeight: 1,
@@ -492,11 +422,10 @@ function StageHUD({ stage }) {
         >
           {display}
         </div>
-        {/* Progress bar */}
         <div
           style={{
             marginTop: "0.9rem",
-            width: 160,
+            width: "clamp(80px, 20vw, 160px)",                 // ✅ responsive
             height: 2,
             background: "#1c313a",
             borderRadius: 2,
@@ -517,14 +446,14 @@ function StageHUD({ stage }) {
         </div>
       </div>
 
-      {/* Bottom right coordinate readout (BIM-style) */}
+      {/* Bottom right coordinate readout */}
       <div
         style={{
           position: "absolute",
-          bottom: "1.6rem",
-          right: "2rem",
-          color: "#455a64",
-          fontSize: "0.6rem",
+          bottom: "clamp(0.75rem, 2vw, 1.6rem)",               // ✅ responsive
+          right: "clamp(0.75rem, 2vw, 2rem)",
+          color: "#bec0c1ff",
+          fontSize: "clamp(0.45rem, 1.2vw, 0.6rem)",           // ✅ responsive
           fontFamily: "'Courier New', monospace",
           letterSpacing: "0.08em",
           textAlign: "right",
@@ -548,24 +477,37 @@ function StageHUD({ stage }) {
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function HomeBackground() {
   const [stage, setStage] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth < 768);
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        background: "#c9d5daff",
-      }}
-    >
+    // ✅ fills 100% of whatever parent gives it — works inside your h-screen div
+    <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "#c9d5daff" }}>
       <Canvas
         shadows
-        camera={{ position: [0, 11, 5], fov: 42 }}
-        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
+        //camera={{ position: [0, 11, 5], fov: 42 }}
+        camera={{
+  position: isMobile ? [0, 14, 8] : [0, 11, 5],
+  fov: isMobile ? 55 : 42
+}}
+        style={{ width: "100%", height: "100%" }}   // ✅ explicit fill
+        gl={{
+          antialias: true,
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.1,
+        }}
       >
-        <Scene onStageChange={setStage} />
+        {/* <Scene onStageChange={setStage} /> */}
+        <group scale={isMobile ? 0.75 : 1}>
+  <Scene onStageChange={setStage} />
+</group>
       </Canvas>
-      <StageHUD stage={stage} />
+      {/* <StageHUD stage={stage} /> */}
     </div>
   );
 }
