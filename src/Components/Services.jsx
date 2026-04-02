@@ -262,9 +262,9 @@ export default function Services() {
           <div ref={(el) => addRef(el)} className="scroll-fade-up grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { step: "🔍", title: "Project Assessment", desc: "Understand project scope, drawings, and client requirements." },
-  { step: "📝", title: "Strategic Planning", desc: "Define workflow, timelines, and detailing approach." },
-  { step: "⚙️", title: "Detailing Execution", desc: "Expert crews execute every phase with precision and care." },
-  { step: "🚀", title: "Quality Assurance & Delivery", desc: "Final inspections, quality checks, and project delivery." },
+              { step: "📝", title: "Strategic Planning", desc: "Define workflow, timelines, and detailing approach." },
+              { step: "⚙️", title: "Detailing Execution", desc: "Expert crews execute every phase with precision and care." },
+              { step: "🚀", title: "Quality Assurance & Delivery", desc: "Final inspections, quality checks, and project delivery." },
             ].map((p, i) => (
               <div
                 key={p.step}

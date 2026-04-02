@@ -36,15 +36,17 @@ export default function Home({ setActivePage }) {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg-base)', color: 'var(--color-text-primary)' }}>
+
       {/* ── HERO SECTION ── */}
       <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen overflow-hidden"
         style={{ backgroundColor: 'var(--color-bg-dark)' }}
       >
+        {/* ── 3D Background fills the entire section ── */}
+        <HomeBackground />
 
-<div className="relative w-full h-screen overflow-hidden">
-  <HomeBackground />
- <div className="hero-overlay" />
+        {/* ── Dark overlay so text stays readable ── */}
+        <div className="hero-overlay" />
 
         {/* Yellow accent stripe */}
         <div
@@ -52,8 +54,8 @@ export default function Home({ setActivePage }) {
           style={{ backgroundColor: 'var(--color-primary)' }}
         />
 
-        {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center py-24">
+        {/* Hero content — sits on top of the 3D canvas */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center min-h-screen py-24">
           <div>
 
             {/* Badge */}
@@ -124,7 +126,7 @@ export default function Home({ setActivePage }) {
                 onClick={() => setActivePage('Contact')}
                 className="px-8 py-4 text-sm font-bold uppercase transition-all duration-200"
                 style={{
-                  border:        '1px solid var(--color-border-light)',
+                  border:        '1px solid var(--color-primary)',
                   color:         'var(--color-text-primary)',
                   letterSpacing: 'var(--tracking-widest)',
                   fontFamily:    'var(--font-body)',
@@ -181,14 +183,16 @@ export default function Home({ setActivePage }) {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs uppercase animate-bounce z-10"
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs uppercase animate-bounce z-10"
           style={{ color: 'var(--color-border)', letterSpacing: 'var(--tracking-widest)' }}
         >
           <span>Scroll</span>
           <span>↓</span>
         </div>
-      </div>
+
       </section>
+      {/* ── end HERO SECTION ── */}
 
       {/* ── MOBILE STATS ── */}
       <section
@@ -226,9 +230,9 @@ export default function Home({ setActivePage }) {
         style={{ paddingTop: 'var(--space-section-y)', paddingBottom: 'var(--space-section-y)' }}
       >
         {/* Section header */}
-        <div ref={addRef} className="scroll-fade-up mb-14 max-w-xl">
+        <div ref={addRef} className="scroll-fade-up mb-14 text-center max-w-7xl mx-auto">
           <span
-            className="text-xs font-bold uppercase"
+            className="text-xs font-bold uppercase tracking-[0.3em]"
             style={{
               color:         'var(--color-primary)',
               letterSpacing: 'var(--tracking-widest)',
@@ -238,13 +242,13 @@ export default function Home({ setActivePage }) {
             Why Choose Us
           </span>
           <h2
-            className="text-4xl md:text-5xl font-black uppercase mt-2"
+            className="text-4xl md:text-4xl font-black uppercase mt-2"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             Built on <span style={{ color: 'var(--color-primary)' }}>Trust</span>
           </h2>
           <div
-            className="w-16 h-1 mt-4"
+            className=" h-1 mt-4"
             style={{ backgroundColor: 'var(--color-primary)' }}
           />
         </div>
@@ -255,7 +259,6 @@ export default function Home({ setActivePage }) {
             <div
               key={f.title}
               ref={addRef}
-              // className="scroll-fade-up p-7 transition-all duration-300 group"
               className="service-card scroll-fade-up border p-8 group overflow-hidden min-w-0 w-full 
                 transition-all duration-200 ease-in-out transform"
               style={{
@@ -263,17 +266,16 @@ export default function Home({ setActivePage }) {
                 border:          '1px solid var(--color-border)',
                 transitionDelay: `${i * 100}ms`,
               }}
-             onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
-                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
-                  e.currentTarget.style.borderColor = "var(--color-primary)";
-                }}
-
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0) scale(1)";
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.borderColor = "var(--color-border)";
-                }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
+                e.currentTarget.style.borderColor = "var(--color-primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "var(--color-border)";
+              }}
             >
               <span className="text-4xl block mb-4">{f.icon}</span>
               <h3
@@ -326,9 +328,9 @@ export default function Home({ setActivePage }) {
           </p>
           <button
             onClick={() => {
-                setActivePage('Contact');
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              setActivePage('Contact');
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="px-10 py-4 text-sm font-black uppercase transition-all duration-200"
             style={{
               backgroundColor: 'var(--color-bg-base)',
