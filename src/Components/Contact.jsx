@@ -117,7 +117,7 @@
 //                 <div className="grid sm:grid-cols-2 gap-5">
 //                   <div>
 //                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Full Name <span className="text-red-500">*</span>
+//                       Full Name <span className="text-#ef4444-500">*</span>
 //                     </label>
 //                     <input
 //                       type="text"
@@ -131,7 +131,7 @@
 //                   </div>
 //                   <div>
 //                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Email Address  <span className="text-red-500">*</span>
+//                       Email Address  <span className="text-#ef4444-500">*</span>
 //                     </label>
 //                     <input
 //                       type="email"
@@ -179,7 +179,7 @@
 //                 </div>
 //                 <div>
 //                   <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                     Your Message <span className="text-red-500">*</span>
+//                     Your Message <span className="text-#ef4444-500">*</span>
 //                   </label>
 //                   <textarea
 //                     name="message"
@@ -209,6 +209,9 @@
 
 import { useState } from "react";
 import useScrollAnimation from '../Components/CommonComponents/useScrollAnimation';
+import emailjs from "@emailjs/browser";
+import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "../Constants/EmailServices";
+import Swal from "sweetalert2";
 
 export default function Contact() {
   const addRef = useScrollAnimation();
@@ -222,16 +225,110 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (form.name && form.email && form.message) {
-      setSubmitted(true);
-    }
-  };
+  let updatedValue = value;
+
+  // 🔹 Name: allow only letters, space, dot
+  if (name === "name") {
+    updatedValue = value.replace(/[^a-zA-Z\s]/g, "");
+  }
+
+  // 🔹 Phone: allow only numbers and +
+  if (name === "phone") {
+    updatedValue = value.replace(/[^0-9+]/g, "");
+  }
+
+  // 🔹 Email: no restriction while typing (validate later)
+  if (name === "email") {
+    updatedValue = value;
+  }
+
+  setForm((prev) => ({
+    ...prev,
+    [name]: updatedValue,
+  }));
+
+  // 🔹 Remove error when user types valid input
+  setErrors((prev) => ({
+    ...prev,
+    [name]: updatedValue.trim() ? "" : prev[name],
+  }));
+};
+
+
+const validateForm = () => {
+  let newErrors = {};
+
+  // Name
+  if (!form.name.trim()) {
+    newErrors.name = "Name is required";
+  }
+
+  // Email
+  if (!form.email.trim()) {
+    newErrors.email = "Email is required";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    newErrors.email = "Invalid email format";
+  }
+
+  // Phone
+  if (!form.phone.trim()) {
+    newErrors.phone = "Phone number is required";
+  }
+
+  // Service
+  if (!form.service) {
+    newErrors.service = "Please select a service";
+  }
+
+  // Message
+  if (!form.message.trim()) {
+    newErrors.message = "Message is required";
+  }
+
+  setErrors(newErrors);
+
+  return Object.keys(newErrors).length === 0;
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const isValid = validateForm();
+
+  if(isValid){
+      emailjs.send(
+    SERVICE_ID,
+    TEMPLATE_ID,
+    {
+      name: form?.name,
+      email: form?.email,
+      phone: form?.phone,
+      service: form?.service,
+      message: form?.message,
+    },
+    PUBLIC_KEY
+  )
+  .then(() => {
+    setSubmitted(true);
+Swal.fire({
+  icon: "success",
+  title: "Message Sent Successfully",
+  text: "We will get back to you!!!!",
+});
+
+    setForm({ name: "", email: "", phone: "", service: "", message: "" });
+  })
+  .catch((error) => {
+    console.error(error);
+    alert("Email failed to send");
+  });
+  }
+
+};
 
   return (
     <div
@@ -361,43 +458,8 @@ export default function Contact() {
               Send a <span style={{ color: 'var(--color-primary)' }}>Message</span>
             </h2>
 
-            {submitted ? (
-              <div
-                className="p-10 text-center border"
-                style={{
-                  backgroundColor: 'var(--color-bg-card)',
-                  borderColor: 'var(--color-primary)'
-                }}
-              >
-                <div className="text-6xl mb-4">✅</div>
-
-                <h3
-                  className="text-2xl font-black uppercase mb-2"
-                  style={{ color: 'var(--color-primary)' }}
-                >
-                  Message Sent!
-                </h3>
-
-                <p style={{ color: 'var(--color-text-muted)' }}>
-                  Thank you, <strong style={{ color: 'var(--color-text-primary)' }}>{form.name}</strong>!
-                </p>
-
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm({ name: "", email: "", phone: "", service: "", message: "" });
-                  }}
-                  className="mt-6 px-6 py-2.5 font-bold text-sm uppercase tracking-widest"
-                  style={{
-                    backgroundColor: 'var(--color-primary)',
-                    color: 'var(--color-bg-base)'
-                  }}
-                >
-                  Send Another
-                </button>
-              </div>
-            ) : (
-             <form ref={(el) => addRef(el)} onSubmit={handleSubmit} className="scroll-fade-up space-y-5">
+            <div>
+             <form ref={(el) => addRef(el)} noValidate onSubmit={handleSubmit} className="scroll-fade-up space-y-5">
 
   {/* NAME + EMAIL */}
   <div className="grid sm:grid-cols-2 gap-5">
@@ -420,9 +482,10 @@ export default function Contact() {
         className="w-full px-4 py-3 text-sm border"
         style={{
           backgroundColor: 'var(--color-bg-card)',
-          borderColor: 'var(--color-border)',
+          borderColor: errors.name ? '#ef4444' : 'var(--color-border)',
           color: 'var(--color-text-primary)'
         }}
+        required= {true}
       />
     </div>
 
@@ -444,9 +507,10 @@ export default function Contact() {
         className="w-full px-4 py-3 text-sm border"
         style={{
           backgroundColor: 'var(--color-bg-card)',
-          borderColor: 'var(--color-border)',
+          borderColor: errors.email ? '#ef4444' : 'var(--color-border)',
           color: 'var(--color-text-primary)'
         }}
+        required= {true}
       />
     </div>
 
@@ -526,9 +590,10 @@ export default function Contact() {
       className="w-full px-4 py-3 text-sm border"
       style={{
         backgroundColor: 'var(--color-bg-card)',
-        borderColor: 'var(--color-border)',
+        borderColor: errors.message ? '#ef4444' : 'var(--color-border)',        
         color: 'var(--color-text-primary)'
       }}
+      required={true}
     />
   </div>
 
@@ -540,12 +605,14 @@ export default function Contact() {
       backgroundColor: 'var(--color-primary)',
       color: 'var(--color-bg-base)'
     }}
+    
   >
     Send Message →
   </button>
 
 </form>
-            )}
+
+</div>
           </div>
 
         </div>

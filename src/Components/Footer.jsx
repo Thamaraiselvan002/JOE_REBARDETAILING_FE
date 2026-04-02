@@ -168,7 +168,10 @@ export default function Footer({ setActivePage }) {
               {["Home", "Services", "About", "Contact"].map((link) => (
                 <li key={link}>
                   <button
-                    onClick={() => setActivePage(link)}
+                    onClick={() => {
+                      setActivePage(link);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                     className="text-sm transition-colors flex items-center gap-2"
                     style={{ color: 'var(--color-text-muted)' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--color-primary)'}
