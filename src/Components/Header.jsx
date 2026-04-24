@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useScrollAnimation from '../Components/CommonComponents/useScrollAnimation';
+import Logo_With_Transparent from '../Assets/Logo/LOGO_1.png';
 
 export default function Header({ activePage, setActivePage }) {
 
@@ -15,10 +16,10 @@ export default function Header({ activePage, setActivePage }) {
         borderColor: 'var(--color-primary-border)'
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* Logo */}
-        <div
+        {/* <div
           ref={(el) => addRef(el)}
           className="scroll-fade-up flex items-center gap-3 cursor-pointer"
           // onClick={() => setActivePage("Home")}
@@ -28,15 +29,9 @@ export default function Header({ activePage, setActivePage }) {
           }}
         >
           <div
-            className="w-10 h-10 flex items-center justify-center rotate-45"
-            style={{ backgroundColor: 'var(--color-primary)' }}
+           className="w-10 h-10 flex items-center justify-center"
           >
-            <span
-              className="font-black text-lg -rotate-45"
-              style={{ color: 'var(--color-bg-base)' }}
-            >
-              JOE
-            </span>
+            <img src={Logo_With_Transparent} alt="logo" width={'100px'} height={'100px'} />
           </div>
 
           <div>
@@ -56,7 +51,45 @@ export default function Header({ activePage, setActivePage }) {
               Designing Services
             </p>
           </div>
-        </div>
+        </div> */}
+
+<div
+  ref={(el) => addRef(el)}
+  className="scroll-fade-up flex items-center gap-2 cursor-pointer"
+  onClick={() => {
+    setActivePage("Home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+>
+  {/* Increased logo size */}
+  <div className="w-20 h-20 p-[5px] flex items-center justify-center flex-shrink-0">
+    <img 
+      src={Logo_With_Transparent} 
+      alt="logo" 
+      className="w-50 h-50 object-contain scale-125" 
+    />
+  </div>
+
+  {/* Text */}
+  <div className="flex flex-col justify-center leading-tight">
+    <span
+      className="font-black text-2xl tracking-tight uppercase"
+      style={{ color: 'var(--color-text-primary)' }}
+    >
+      Joe{" "}
+      <span style={{ color: 'var(--color-primary)' }}>
+        Rebar Services
+      </span>
+    </span>
+
+    <p
+      className="text-[10px] tracking-[0.2em] uppercase font-semibold mt-[2px]"
+      style={{ color: 'var(--color-text-muted)' }}
+    >
+      JOY OF EMPLOYEE
+    </p>
+  </div>
+</div>
 
         {/* Desktop Nav */}
         <nav
