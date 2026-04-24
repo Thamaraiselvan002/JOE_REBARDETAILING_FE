@@ -153,7 +153,7 @@ const team = [
 ];
 
 const milestones = [
-  { year: "2023", event: "JEO Rebar Services founded in India with a 5-person team." },
+  { year: "2023", event: "JOE Rebar Services founded in India with a 5-person team." },
   { year: "2024", event: "Completed our one of biggest project — a landmark Tomball ISD in USA Stadium." },
   { year: "2025", event: "Expanded operations to various Countries to deliver the Project." },
   { year: "2026", event: "Developing to impore our Network and Networth..." },
@@ -232,7 +232,7 @@ export default function About() {
             </h2>
 
             <p className="leading-relaxed mb-4" style={{ color: 'var(--color-text-muted)' }}>
-              JEO Rebar Services was founded in 2023 with one guiding principle: build it right the first time.
+              JOE Rebar Services was founded in 2023 with one guiding principle: build it right the first time.
             </p>
 
             <p className="leading-relaxed mb-6" style={{ color: 'var(--color-text-muted)' }}>
