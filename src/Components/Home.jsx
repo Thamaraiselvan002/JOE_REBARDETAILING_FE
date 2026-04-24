@@ -74,12 +74,12 @@ export default function Home({ setActivePage }) {
 
             {/* Heading */}
             <h1
-              className="anim-hero-title text-5xl font-black md:text-7xl leading-none uppercase mb-6"
-              style={{ fontFamily: 'var(--font-heading)'}}
+              className="anim-hero-title text-5xl md:text-7xl leading-none uppercase mb-6"
+              style={{ fontFamily: 'var(--font-heading)',color: 'var(--color-primary)'}}
             >
               We Build
               <br />
-              <span style={{ color: 'var(--color-primary)' }}>The Future</span>
+              <span style={{ color: 'var( --color-text-primary)' }}>The Future</span>
               <br />
               Together
             </h1>
