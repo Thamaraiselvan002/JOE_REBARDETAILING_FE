@@ -74,10 +74,10 @@ export default function Header({ activePage, setActivePage }) {
   <div className="flex flex-col justify-center leading-tight">
     <span
       className="font-black text-2xl tracking-tight uppercase"
-      style={{ color: 'var(--color-text-primary)' }}
+      style={{ color: 'var(--color-primary)' }}
     >
       Joe{" "}
-      <span style={{ color: 'var(--color-primary)' }}>
+      <span style={{ color: 'var( --color-text-primary)' }}>
         Rebar Services
       </span>
     </span>
