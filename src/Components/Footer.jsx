@@ -32,10 +32,10 @@ export default function Footer({ setActivePage }) {
               </div>
               <span
                 className="font-black text-xl uppercase"
-                style={{ color: 'var(--color-text-primary)' }}
+                style={{ color: 'var( --color-primary)' }}
               >
                 JOE&nbsp;
-                <span style={{ color: 'var(--color-primary)' }}>
+                <span style={{ color: 'var( --color-text-primary)' }}>
                   Rear Services
                 </span>
               </span>

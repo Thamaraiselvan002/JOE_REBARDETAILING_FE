@@ -58,15 +58,15 @@ export default function WhyUs (){
         <div className="relative max-w-7xl mx-auto">
 
           <span
-            className="services-hero-badge text-xs font-bold uppercase tracking-[0.3em]"
-            style={{ color: 'var(--color-primary)' }}
+            className="services-hero-badge text-xs font-black uppercase tracking-[0.3em]"
+            style={{ color: 'var(--color-text-primary)' }}
           >
             Why Choose Us
           </span>
 
-          <h1 className="services-hero-title text-5xl md:text-2xl font-black uppercase mt-2 mb-4">
+          <h1 className="services-hero-title text-5xl md:text-2xl font-black uppercase mt-2 mb-4" style={{ color: 'var(--color-primary)' }}>
             Precision was the foundation of this structure.
-            <span style={{ color: 'var(--color-primary)' }}>
+            <span style={{ color: 'var(--color-text-primary)' }}>
               Trust propels us forward.
             </span>
           </h1>
@@ -94,7 +94,7 @@ export default function WhyUs (){
 
         <div className="text-center mb-12">
           <span
-            className="text-xs font-bold uppercase tracking-[0.3em]"
+            className="text-xs font-black uppercase tracking-[0.3em]"
             style={{ color: 'var(--color-primary)' }}
           >
             Our Standards and Instruments

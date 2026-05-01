@@ -104,7 +104,7 @@ export default function Header({ activePage, setActivePage }) {
                 setActivePage(link);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="px-5 py-2 text-sm font-semibold tracking-widest uppercase transition-all duration-200"
+              className="px-5 py-2 text-sm font-black tracking-widest uppercase transition-all duration-200"
               style={
                 activePage === link
                   ? { color: 'var(--color-primary)', borderBottom: '2px solid var(--color-primary)' }
@@ -112,7 +112,7 @@ export default function Header({ activePage, setActivePage }) {
               }
               onMouseEnter={e => {
                 if (activePage !== link)
-                  e.currentTarget.style.color = 'var(--color-text-primary)';
+                  e.currentTarget.style.color = 'var(--color-primary)';
               }}
               onMouseLeave={e => {
                 if (activePage !== link)

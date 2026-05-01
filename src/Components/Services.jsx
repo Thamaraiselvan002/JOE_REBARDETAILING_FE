@@ -127,15 +127,15 @@ export default function Services() {
 
         <div className="relative max-w-7xl mx-auto">
           <span
-            className="text-xs font-bold uppercase tracking-[0.3em]"
-            style={{ color: 'var(--color-primary)' }}
+            className="text-xs font-black uppercase tracking-[0.3em]"
+            style={{ color: 'var( --color-text-primary)' }}
           >
             What We Build
           </span>
 
-          <h1 className="text-5xl md:text-6xl font-black uppercase mt-2 mb-4">
+          <h1 className="text-5xl md:text-6xl uppercase font-black mt-2 mb-4" style={{color:'var( --color-primary)'}}>
             Rebar Detailing{" "}
-            <span style={{ color: 'var(--color-primary)' }}>Solutions</span>
+            <span style={{ color: 'var( --color-text-primary)' }}>Solutions</span>
           </h1>
 
           <div
@@ -174,7 +174,8 @@ export default function Services() {
                 style={{
                   transitionDelay: `${i * 100}ms`,
                   backgroundColor: 'var(--color-bg-card)',
-                  borderColor: 'var(--color-border)',
+                  borderBlockEndWidth:  '10px',
+                  borderBlockEndColor:'var(--color-border)',
                 }}
 
                 onMouseEnter={(e) => {
@@ -243,15 +244,18 @@ export default function Services() {
 
           <div ref={(el) => addRef(el)} className="scroll-fade-up text-center mb-14">
             <span
-              className="text-xs font-bold uppercase tracking-[0.3em]"
-              style={{ color: 'var(--color-primary)' }}
+              className="text-xs font-black uppercase tracking-[0.3em]"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               How We Work
             </span>
 
-            <h2 className="text-4xl font-black uppercase mt-2 mb-5">
-              Our Process
-            </h2>
+            <h2
+            className="text-4xl md:text-4xl font-black uppercase mt-2 mb-1"
+            style={{ color:'var( --color-primary)'}}
+          >
+            Our <span style={{ color: 'var( --color-text-primary)' }}>Process</span>
+          </h2>
 
             <div
               className="h-1"
