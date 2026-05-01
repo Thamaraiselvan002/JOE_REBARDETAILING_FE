@@ -29,6 +29,7 @@
   --color-bg-card-glass:  rgba(255, 255, 255, 0.7);
   --color-bg-surface:     #f1f5f9;
   --color-bg-overlay:     rgba(0, 0, 0, 0.05);
+  --color-hover-bg-card: #e7f0eb;
 
   /* ── BORDER COLORS ── */
   --color-border:         #e2e8f0;   /* soft border */

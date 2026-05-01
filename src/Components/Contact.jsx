@@ -1,212 +1,3 @@
-// import { useState } from "react";
-// import useScrollAnimation from '../Components/CommonComponents/useScrollAnimation';
-
-
-// export default function Contact() {
-//   const addRef = useScrollAnimation();  
-
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     service: "",
-//     message: "",
-//   });
-//   const [submitted, setSubmitted] = useState(false);
-
-//   const handleChange = (e) =>
-//     setForm({ ...form, [e.target.name]: e.target.value });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (form.name && form.email && form.message) {
-//       setSubmitted(true);
-//     }
-//   };
-
-//   return (
-//     <div className="bg-zinc-900 text-white min-h-screen">
-//       {/* Page Hero */}
-//       <section ref={addRef} className="scroll-fade-up bg-zinc-800 border-b border-zinc-700 py-24 px-6 relative overflow-hidden">
-//         <div
-//           className="absolute inset-0 opacity-5"
-//           style={{
-//             backgroundImage:
-//               "repeating-linear-gradient(0deg, #eab308 0, #eab308 1px, transparent 0, transparent 50%), repeating-linear-gradient(90deg, #eab308 0, #eab308 1px, transparent 0, transparent 50%)",
-//             backgroundSize: "40px 40px",
-//           }}
-//         />
-//         <div className="relative max-w-7xl mx-auto">
-//           <span className="text-yellow-500 text-xs font-bold uppercase tracking-[0.3em]">Get In Touch</span>
-//           <h1 className="text-5xl md:text-6xl font-black uppercase mt-2 mb-4">
-//             Contact <span className="text-yellow-500">Us</span>
-//           </h1>
-//             <div className="anim-hero-divider h-1 bg-yellow-500 mb-6" />
-//           <p className="text-zinc-400 max-w-lg text-lg">
-//             Ready to discuss your project? Our team is available Monday through Saturday. Reach out and we'll respond within 24 hours.
-//           </p>
-//         </div>
-//       </section>
-
-//       <section className="max-w-7xl mx-auto px-6 py-20">
-//         <div className="grid lg:grid-cols-5 gap-12">
-//           {/* Contact Info */}
-//           <div ref={addRef} className="scroll-fade-up lg:col-span-2 space-y-6">
-//             <h2 className="text-2xl font-black uppercase mb-6">
-//               Reach Us <span className="text-yellow-500">Directly</span>
-//             </h2>
-//             {[
-//               {
-//                 icon: "📍",
-//                 title: "Office Address",
-//                 detail: "Chennai, TamilNadu, India",
-//               },
-//               // {
-//               //   icon: "📞",
-//               //   title: "Phone Number",
-//               //   detail: "+1 (800) 555-BUILD\n+1 (212) 555-0192",
-//               // },
-//               {
-//                 icon: "✉️",
-//                 title: "Email Address",
-//                 detail: "deepa@joerebarservices.com\ndetailing@joerebarservices.com",
-//               },
-//               {
-//                 icon: "🕐",
-//                 title: "Working Hours",
-//                 detail: "Reliable & Timely Communication",
-//               },
-//             ].map((c) => (
-//               <div
-//                 key={c.title}
-//                 className="bg-zinc-800 border border-zinc-700 p-5 flex gap-4 hover:border-yellow-500/50 transition-all"
-//               >
-//                 <span className="text-2xl flex-shrink-0">{c.icon}</span>
-//                 <div>
-//                   <h4 className="text-yellow-500 font-bold text-xs uppercase tracking-widest mb-1">
-//                     {c.title}
-//                   </h4>
-//                   <p className="text-zinc-400 text-sm whitespace-pre-line">{c.detail}</p>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Contact Form */}
-//           <div ref={addRef} className="scroll-fade-up lg:col-span-3">
-//             <h2 className="text-2xl font-black uppercase mb-6">
-//               Send a <span className="text-yellow-500">Message</span>
-//             </h2>
-
-//             {submitted ? (
-//               <div ref={addRef} className="scroll-fade-up bg-zinc-800 border border-yellow-500 p-10 text-center">
-//                 <div className="text-6xl mb-4">✅</div>
-//                 <h3 className="text-2xl font-black text-yellow-500 uppercase mb-2">Message Sent!</h3>
-//                 <p className="text-zinc-400">
-//                   Thank you, <strong className="text-white">{form.name}</strong>! Our team will contact you within 24 hours.
-//                 </p>
-//                 <button
-//                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", service: "", message: "" }); }}
-//                   className="mt-6 px-6 py-2.5 bg-yellow-500 text-zinc-900 font-bold text-sm uppercase tracking-widest hover:bg-yellow-400 transition-all"
-//                 >
-//                   Send Another
-//                 </button>
-//               </div>
-//             ) : (
-//               <form ref={addRef} onSubmit={handleSubmit} className="scroll-fade-up space-y-5">
-//                 <div className="grid sm:grid-cols-2 gap-5">
-//                   <div>
-//                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Full Name <span className="text-#ef4444-500">*</span>
-//                     </label>
-//                     <input
-//                       type="text"
-//                       name="name"
-//                       value={form.name}
-//                       onChange={handleChange}
-//                       required
-//                       placeholder="Please Enter Your Name..."
-//                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-yellow-500 transition-colors placeholder-zinc-600"
-//                     />
-//                   </div>
-//                   <div>
-//                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Email Address  <span className="text-#ef4444-500">*</span>
-//                     </label>
-//                     <input
-//                       type="email"
-//                       name="email"
-//                       value={form.email}
-//                       onChange={handleChange}
-//                       required
-//                       placeholder="Please Enter Your Email..."
-//                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-yellow-500 transition-colors placeholder-zinc-600"
-//                     />
-//                   </div>
-//                 </div>
-//                 <div className="grid sm:grid-cols-2 gap-5">
-//                   <div>
-//                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Phone Number
-//                     </label>
-//                     <input
-//                       type="tel"
-//                       name="phone"
-//                       value={form.phone}
-//                       onChange={handleChange}
-//                       placeholder="Please Enter Your Mobile No..."
-//                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-yellow-500 transition-colors placeholder-zinc-600"
-//                     />
-//                   </div>
-//                   <div>
-//                     <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                       Service Needed
-//                     </label>
-//                     <select
-//                       name="service"
-//                       value={form.service}
-//                       onChange={handleChange}
-//                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-yellow-500 transition-colors appearance-none"
-//                     >
-//                       <option value="">Select a service...</option>
-//                       <option>Rebar Detailing</option>
-//                       <option>Bar Bending Schedules</option>
-//                       <option>Renovation & Remodeling</option>
-//                       <option>Civil & Infrastructure</option>
-//                       <option>Project Management</option>
-//                     </select>
-//                   </div>
-//                 </div>
-//                 <div>
-//                   <label className="block text-zinc-400 text-xs uppercase tracking-widest mb-2">
-//                     Your Message <span className="text-#ef4444-500">*</span>
-//                   </label>
-//                   <textarea
-//                     name="message"
-//                     value={form.message}
-//                     onChange={handleChange}
-//                     required
-//                     rows={5}
-//                     placeholder="Tell us about your project..."
-//                     className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 text-sm focus:outline-none focus:border-yellow-500 transition-colors resize-none placeholder-zinc-600"
-//                   />
-//                 </div>
-//                 <button
-//                   type="submit"
-//                   className="w-full py-4 bg-yellow-500 text-zinc-900 font-black text-sm uppercase tracking-widest hover:bg-yellow-400 transition-all duration-200"
-//                 >
-//                   Send Message →
-//                 </button>
-//               </form>
-//             )}
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
-
-
 import { useState } from "react";
 import useScrollAnimation from '../Components/CommonComponents/useScrollAnimation';
 import emailjs from "@emailjs/browser";
@@ -370,14 +161,14 @@ Swal.fire({
 
         <div className="relative max-w-7xl mx-auto">
           <span
-            className="text-xs font-bold uppercase tracking-[0.3em]"
-            style={{ color: 'var(--color-primary)' }}
+            className="text-xs font-black uppercase tracking-[0.3em]"
+            style={{ color: 'var(--color-tex-primary)' }}
           >
             Get In Touch
           </span>
 
-          <h1 className="text-5xl md:text-6xl font-black uppercase mt-2 mb-4">
-            Contact <span style={{ color: 'var(--color-primary)' }}>Us</span>
+           <h1 className="text-5xl md:text-6xl font-black uppercase mt-2 mb-4" style={{ color: 'var(--color-primary)' }}>
+            Contact <span style={{ color: 'var(--color-text-primary)' }}>Us</span>
           </h1>
 
           <div
@@ -400,8 +191,8 @@ Swal.fire({
 
           {/* CONTACT INFO */}
           <div ref={(el) => addRef(el)} className="scroll-fade-up lg:col-span-2 space-y-6">
-            <h2 className="text-2xl font-black uppercase mb-6">
-              Reach Us <span style={{ color: 'var(--color-primary)' }}>Directly</span>
+            <h2 className="text-2xl uppercase mb-6 font-black" style={{ color: 'var(--color-primary)' }}>
+              Reach Us <span style={{ color: 'var(--color-text-primary)' }}>Directly</span>
             </h2>
 
             {[
@@ -426,10 +217,19 @@ Swal.fire({
                 className="border p-5 flex gap-4 transition-all"
                 style={{
                   backgroundColor: 'var(--color-bg-card)',
-                  borderColor: 'var(--color-border)'
+                  borderBlockEndWidth:  '10px',
+                  borderBlockEndColor:'var(--color-border)',
                 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary)'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-border)'}
+
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
+                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                }}
+
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
+                }}
               >
                 <span className="text-2xl">{c.icon}</span>
 
@@ -454,8 +254,8 @@ Swal.fire({
 
           {/* FORM */}
           <div ref={(el) => addRef(el)} className="scroll-fade-up lg:col-span-3">
-            <h2 className="text-2xl font-black uppercase mb-6">
-              Send a <span style={{ color: 'var(--color-primary)' }}>Message</span>
+            <h2 className="text-2xl uppercase mb-6 font-black" style={{ color: 'var(--color-primary)' }}>
+              Send a <span style={{ color: 'var(--color-text-primary)' }}>Message</span>
             </h2>
 
             <div>

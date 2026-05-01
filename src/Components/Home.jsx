@@ -153,17 +153,24 @@ export default function Home({ setActivePage }) {
                 key={s.label}
                 className="backdrop-blur p-6 transition-all duration-300 group"
                 style={{
-                  backgroundColor: 'var(--color-bg-card-glass)',
-                  border:          '1px solid var(--color-border)',
-                  opacity:          0,
-                  animation:       `fadeUp 0.65s ease-out ${0.5 + i * 0.1}s forwards`,
+                  backgroundColor: 'var(--color-bg-card)',
+                  borderBlockEndWidth:  '10px',
+                  borderBlockEndColor:'var(--color-border)',
                 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary-border-hover)'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-border)'}
+
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
+                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                }}
+
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
+                }}
               >
                 <div
                   className="text-4xl font-black transition-transform group-hover:scale-105"
-                  style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-heading)' }}
+                  style={{ color: 'var(--color-primary)' }}
                 >
                   {s.number}
                 </div>
@@ -206,7 +213,7 @@ export default function Home({ setActivePage }) {
           <div key={s.label} className="p-5 text-center">
             <div
               className="text-3xl font-black"
-              style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-heading)' }}
+              style={{ color: 'var(--color-primary)' }}
             >
               {s.number}
             </div>
@@ -234,7 +241,7 @@ export default function Home({ setActivePage }) {
           <span
             className="text-xs font-bold uppercase tracking-[0.3em]"
             style={{
-              color:         'var(--color-primary)',
+              color:         'var( --color-text-primary)',
               letterSpacing: 'var(--tracking-widest)',
               fontFamily:    'var(--font-body)',
             }}
@@ -242,10 +249,10 @@ export default function Home({ setActivePage }) {
             Why Choose Us
           </span>
           <h2
-            className="text-4xl md:text-4xl font-black uppercase mt-2"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="text-4xl md:text-4xl font-black  uppercase mt-2"
+            style={{color:'var( --color-primary)'}}
           >
-            Built on <span style={{ color: 'var(--color-primary)' }}>Trust</span>
+            Built on <span style={{ color: 'var( --color-text-primary)' }}>Trust</span>
           </h2>
           <div
             className=" h-1 mt-4"
@@ -262,20 +269,23 @@ export default function Home({ setActivePage }) {
               className="service-card scroll-fade-up border p-8 group overflow-hidden min-w-0 w-full 
                 transition-all duration-200 ease-in-out transform"
               style={{
-                backgroundColor: 'var(--color-bg-card)',
-                border:          '1px solid var(--color-border)',
-                transitionDelay: `${i * 100}ms`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
-                e.currentTarget.style.borderColor = "var(--color-primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "var(--color-border)";
-              }}
+                  transitionDelay: `${i * 100}ms`,
+                  backgroundColor: 'var(--color-bg-card)',
+                  borderBlockEndWidth:  '10px',
+                  borderBlockEndColor:'var(--color-border)',
+                }}
+
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-10px) scale(1.02)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)";
+                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                }}
+
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0) scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
+                }}
             >
               <span className="text-4xl block mb-4">{f.icon}</span>
               <h3
@@ -311,8 +321,7 @@ export default function Home({ setActivePage }) {
           <h2
             className="text-3xl md:text-5xl font-black uppercase mb-4"
             style={{
-              color:      'var(--color-text-dark)',
-              fontFamily: 'var(--font-heading)',
+              color:      'var(--color-text-dark)'
             }}
           >
             Ready to Start Your Project?
